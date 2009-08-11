@@ -1,53 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>App Engine Image Host</title>
-    <link rel="stylesheet" href="/assets/css/reset.css" type="text/css" media="all" charset="utf-8"/>
-    <link rel="stylesheet" href="/assets/css/common.css" type="text/css" media="all" charset="utf-8"/>
-    <link rel="stylesheet" href="/assets/css/lightbox.css" type="text/css" media="screen" charset="utf-8"/>
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="robots" content="index, follow" /><title>Awkward Beauty</title>
+<link href="/css/index.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/jquery.lightbox-0.5.css" />
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.lightbox-0.5.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</head><body>
+<div id="pageContainer"><!-- Slideshow HTML -->
+<div id="slideshow">
+<div id="slidesContainer" style="overflow-x: hidden; overflow-y: hidden;">
+	<div id="slideInner" style="width: {{ total_width }}px;">
 
-    <script src="/assets/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/assets/js/jquery.lightbox.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/assets/js/common.js" type="text/javascript" charset="utf-8"></script>
-</head>
-<body>
-    <div id="main">
-        <div id="head">
-            <h1>App Engine <span>Image Host</span></h1>
-            <a href="{{logout}}">logout</a>
-        </div> <!-- end head -->
+{% for image in images %}
 
-        <div id="content">
-            <form action="/upload" enctype="multipart/form-data" method="post">
-                <label for="img">Image</label>
-                <input type="file" name="img" id="img"/>
-                <label for="width">Width</label>
-                <input type="text" name="width" id="width" class="txt"/>
-                <label for="height">Height</label>
-                <input type="text" name="height" id="height" class="txt"/>
-                <input type="submit" value="Upload"/>
-            </form>
-            
-            <p>Not specifying a width or height will result in the original image being stored unaltered in dimension. All images are converted to pngs. Maximum 1MB.</p>
+<div class="slide" style="float: left; width: 850px;">
+	
+<a href="/i/img?id={{ image.key }}" title={{ image.title }}>
+<img src="/i/img?id={{ image.key }}">
+</a>
 
-            {% if images %}
-            <ul id="images">
-            {% for image in images %}
-                <li>
-                    <a href="/i/img?id={{image.key}}" class="lightbox"><img src="/i/thumb?id={{image.key}}"/></a>
-                    <form action="/delete" method="post">
-                        <input type="hidden" value="{{image.key}}" name="key"/>
-                        <input type="submit" value="Delete" name="delete"/>
-                    </form>
-                </li>
-            {% endfor %}
-            </ul> <!-- end images -->
-            {% endif %}
-            
-            <p>This application was originally build by Gareth Rushgroge to host and quickly resize images for his blog <a href="http://morethanseven.net">morethanseven.net</a>. The code can be found on <a href="http://github.com/garethr/appengine-image-host">GitHub</a>.</p>
-        
-        </div> <!-- end content -->
-    </body>
-</html>
+</div>
+
+{% endfor %}
+
+
+</div>
+</div>
+</div>
+</div>
+<div class="mainMenu">
+<div id="controls">
+<span class="control" id="leftControl">
+<img src="/images/leftArrow.png" style="display:none;">	
+</span>
+<span class="control active" id="rightControl">
+<img src="/images/rightArrow.png">	
+</span>
+</div>
+<div class="topMainMenu">
+<div class="mainNav">
+<span id="logo">
+<img src="images/taiLogo.png" width="425" height="68" alt="T'ai Rising-Moore Logo" /></span>
+<span id="test"><img src="images/blank.png" width="100" height="50" /></span> 
+<span class="nav"><!-- <img id="leftControl" src="images/leftArrow.png" width="48" height="21" alt="Left Arrow" /> --> <img src="images/exhibit.png" width="100" height="8" alt="Exhibit" />
+ <!-- <img id="rightControl" src="images/rightArrow.png" width="55" height="27" alt="Right Arrow" /> --></span> <!-- <img src="images/dots.png" width="305" height="2" alt="......." /> --> 
+<span id="test"><img src="images/blank.png" width="50" height="50" /><img src="images/blank.png" width="50" height="50" /></span> <span id="ai"><img src="images/artInspiration.png" width="163" height="9" alt="Art.Insp" /></span>
+</div><br /><a href="mailto:tai@awkwardbeauty.ca"><img id="mainNav2" src="images/contact.png" width="288" height="12" alt="contact" name="mainNav2" /></a></div></div></body></html>

@@ -1,15 +1,24 @@
-application: jamtodaycdn
-version: 1
+application: awkwardbeautyca
+version: 0-01
 runtime: python
 api_version: 1
 
 handlers:
-- url: /assets
-  static_dir: assets
+- url: /css
+  static_dir: css
   
+- url: /js
+  static_dir: js
+
+- url: /images
+  static_dir: images
+
 - url: /i/(img|thumb).*
   script: frontend.py
 
+- url: /
+  script: index.py
+  
 - url: /.*
-  script: backend.py
+  script: admin.py
   login: admin

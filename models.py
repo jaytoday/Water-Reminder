@@ -6,7 +6,8 @@ class Image(db.Model):
     # blog properties storing up to 1MB of binary data
     image = db.BlobProperty()
     thumb = db.BlobProperty()
-    original = db.BlobProperty()
+    # caption/title
+    title = db.StringProperty()
     # store the date just in case
     date = db.DateTimeProperty(auto_now_add=True)
     # all images are associated with the user who uploades them

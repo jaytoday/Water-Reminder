@@ -1,0 +1,109 @@
+.mainMenu {
+	position: relative;
+	height: 150px;
+	width: 100%;
+	margin-top:20px;
+	text-align: center;
+}
+.topMainMenu {
+	width: 80%;
+	position: relative;
+	height: 100%;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+.mainNav {
+	width: 100%;
+	position: relative;
+	text-align: left;
+}
+#mainNav2 {
+	clear: both;
+	float: right;
+	position: relative;
+	right: 30px;
+	border:none;
+}
+* {
+	margin: 0px;
+	padding: 0px;
+}
+#ai {
+	margin: 0px;
+	position: relative;
+	padding: 0px;
+}
+.nav {
+	width: 225px;
+}
+#logo {
+	position: relative;
+}
+#test {
+	background-image: url(/images/dots.png);
+	background-repeat: repeat-x;
+	width: 10%;
+	background-position: -10px;
+}
+#pageContainer {
+	margin-top: 30px;
+}
+
+/** 
+ * Slideshow style rules.
+ */
+#slideshow {
+        margin:0 auto;
+        width:980px;
+        height:450px;
+        /* background:transparent url(img/bg_slideshow.jpg) no-repeat 0 0; */
+        position:relative;
+}
+#slideshow #slidesContainer {
+  margin:0 auto;
+  width:850px;
+  height:450px;
+  overflow:auto; /* allow scrollbar */
+  position:relative;
+}
+#slideshow #slidesContainer .slide {
+  margin:0 auto;
+  width:820px; 
+  height:450px;
+}
+
+/** 
+ * Slideshow controls style rules.
+ */
+ #controls {
+  position:absolute;
+  margin: 20px 0 -45px 500px;
+  z-index:60;
+}
+.control {
+  display:block;
+  width:55px;
+  height:21px;
+  float:left;
+}
+
+.control.active{
+  cursor: pointer;
+}
+#leftControl {
+}
+
+#rightControl {
+  margin-left:20px;
+}
+
+/** 
+ * Style rules for Demo page
+ */
+.slide img {
+  
+        margin:0;
+        border:none;
+}
