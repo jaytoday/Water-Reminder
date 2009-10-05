@@ -95,10 +95,24 @@
 #leftControl {
 }
 
+#leftControl.active{
+background:transparent url(/images/leftArrow.png) repeat scroll 0 0;
+}
+
+#leftControl.active:hover{
+background:transparent url(/images/leftArrowHover.png) repeat scroll 0 0;
+}
 #rightControl {
   margin-left:20px;
 }
 
+#rightControl.active{
+background:transparent url(/images/rightArrow.png) repeat scroll 0 0;
+}
+
+#rightControl.active:hover{
+background:transparent url(/images/rightArrowHover.png) repeat scroll 0 0;
+}
 /** 
  * Style rules for Demo page
  */
@@ -106,4 +120,8 @@
   
         margin:0;
         border:none;
+}
+
+.slide .imageContainer{
+display:none;
 }

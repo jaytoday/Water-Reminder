@@ -15,11 +15,11 @@
 {% for image in images %}
 
 <div class="slide" style="float: left; width: 850px;">
-	
+<div class="imageContainer">
 <a href="/i/img?id={{ image.key }}" title={{ image.title }}>
-<img src="/i/img?id={{ image.key }}">
+<img _src="/i/img?id={{ image.key }}">
 </a>
-
+</div>	
 </div>
 
 {% endfor %}
@@ -32,10 +32,8 @@
 <div class="mainMenu">
 <div id="controls">
 <span class="control" id="leftControl">
-<img src="/images/leftArrow.png" style="display:none;">	
 </span>
 <span class="control active" id="rightControl">
-<img src="/images/rightArrow.png">	
 </span>
 </div>
 <div class="topMainMenu">
