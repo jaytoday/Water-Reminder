@@ -1,3 +1,8 @@
+a, a img{
+border:medium none;
+}
+
+
 .mainMenu {
 	position: relative;
 	height: 150px;
@@ -19,28 +24,42 @@
 	position: relative;
 	text-align: left;
 }
-#mainNav2 {
-	clear: both;
-	float: right;
-	position: relative;
-	right: 30px;
-	border:none;
+#contact {
+left:435px;
+position:absolute;
+top:93px;
 }
+
+
+
+
 * {
 	margin: 0px;
 	padding: 0px;
 }
 #ai {
-	margin: 0px;
-	position: relative;
-	padding: 0px;
+left:505px;
+position:absolute;
+top:125px;
 }
 .nav {
-	width: 225px;
+left:340px;
+position:absolute;
+top:30px;
 }
 #logo {
-	position: relative;
+left:70px;
+position:absolute;
+top:70px;
+background:transparent url(/images/taiLogo.png) repeat scroll 0 0;
+width: 425px;
+height: 68px;
 }
+
+#logo:hover, #logoHidden{
+background:transparent url(/images/taiLogoHover.png) repeat scroll 0 0;
+}
+
 #test {
 	background-image: url(/images/dots.png);
 	background-repeat: repeat-x;
@@ -48,7 +67,8 @@
 	background-position: -10px;
 }
 #pageContainer {
-	margin-top: 30px;
+margin:30px auto;
+width:1000px;
 }
 
 /** 
@@ -78,9 +98,9 @@
  * Slideshow controls style rules.
  */
  #controls {
-  position:absolute;
-  margin: 20px 0 -45px 500px;
-  z-index:60;
+margin:30px 0 -45px 380px;
+position:absolute;
+z-index:60;
 }
 .control {
   display:block;
@@ -92,6 +112,7 @@
 .control.active{
   cursor: pointer;
 }
+
 #leftControl {
 }
 
@@ -99,20 +120,27 @@
 background:transparent url(/images/leftArrow.png) repeat scroll 0 0;
 }
 
-#leftControl.active:hover{
+#leftControl.active:hover, #hiddenleftControl{
 background:transparent url(/images/leftArrowHover.png) repeat scroll 0 0;
 }
 #rightControl {
-  margin-left:20px;
+  margin-left:110px;
 }
 
 #rightControl.active{
 background:transparent url(/images/rightArrow.png) repeat scroll 0 0;
 }
 
-#rightControl.active:hover{
+#rightControl.active:hover, #hiddenrightControl{
 background:transparent url(/images/rightArrowHover.png) repeat scroll 0 0;
 }
+
+#hiddenrightControl, #hiddenleftControl, #logoHidden{
+	filter: alpha(opacity=0) !important;
+	-khtml-opacity: 0 !important;
+	opacity: 0 !important;
+}
+
 /** 
  * Style rules for Demo page
  */

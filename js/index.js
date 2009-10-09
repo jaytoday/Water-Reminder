@@ -1,12 +1,27 @@
 
 $(document).ready(function(){
-  
-   $('#slidesContainer a').lightBox({
+
+  /*
+
+     $('#slidesContainer a').lightBox({
 	overlayBgColor: '#666',
 	overlayOpacity: 0.6,
 	containerResizeSpeed: 350
    });
-  
+   
+  */  
+     $('#slidesContainer a').click(function(){
+
+       if ($('#controls').find('.active:last').attr('id') === 'leftControl')
+       actionControl = $('#leftControl');
+       
+       if ($('#controls').find('.active:first').attr('id') === 'rightControl')
+       actionControl = $('#rightControl');
+
+       actionControl.click();
+     });
+     
+     
   // set vars 
   var currentPosition = 0;
   var slideWidth = 950;
