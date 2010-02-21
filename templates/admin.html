@@ -41,14 +41,30 @@
             {% for image in images %}
                 <li>
                     <a href="/i/img?id={{image.key}}" class="lightbox"><img src="/i/thumb?id={{image.key}}"/></a><br/>
-<div class="title" style="width:100px; clear:both;">{{ image.title }}</div>
+<div class="title" style="width:100px; clear:both;"><strong>{{ forloop.counter }}</strong> -- {{ image.title }}</div>
                     <form action="/delete" method="post">
                         <input type="hidden" value="{{image.key}}" name="key"/>
                         <input type="submit" value="Delete" name="delete"/>
                     </form>
+                    
+                    <form action="/upload" enctype="multipart/form-data" method="post">
+                        <input type="hidden" value="{{image.key}}" name="key"/>
+                        <div style="margin-top:5px;">
+                        <input type="file" name="img" id="img"/>
+                        </div>
+New Position <select value="New Position" name="position">
+                        {% for c in image_count %}
+                        <option value="{{ c }}">{{ c }}</option>
+                        {% endfor %}
+                        </select>
+                        <div style="margin-top:5px;">
+                        <input type="submit" value="Update" name="update"/>
+                        </div>
+                        
+                    </form>
 
                 </li>
-<br/><br/><br/>
+<div style="height:20px; clear:both;"></div>
             {% endfor %}
             </ul> <!-- end images -->
             {% endif %}

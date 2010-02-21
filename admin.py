@@ -25,8 +25,7 @@ class Admin(webapp.RequestHandler):
     def get(self):
         "Responds to GET requets with the admin interface"
         # query the datastore for images
-        images = Image.all()
-        images.order("date")
+        images = Image.all().order("date").fetch(1000)
 
         # we are enforcing loggins so we know we have a user
         user = users.get_current_user()
@@ -36,6 +35,7 @@ class Admin(webapp.RequestHandler):
         # prepare the context for the template
         context = {
             "images": images,
+            "image_count": range(len(images)),
             "logout": logout,
             "site_name": "Awkward Beauty"
         }
@@ -62,33 +62,43 @@ class Uploader(webapp.RequestHandler):
     "Deals with uploading new images to the datastore"
     def post(self):
         "Upload via a multitype POST message"
-        
-        try:
-            # check we have numerical width and height values
-            width = int(self.request.get("width"))
-            height = int(self.request.get("height"))
-        except ValueError:
-            # if we don't have valid width and height values
-            # then just use the original image
-            image_content = images.resize(self.request.get("img"), 
-            IMAGE_WIDTH, IMAGE_HEIGHT)
+        if self.request.get('img'):
+			try:
+				# check we have numerical width and height values
+				width = int(self.request.get("width"))
+				height = int(self.request.get("height"))
+			except ValueError:
+				# if we don't have valid width and height values
+				# then just use the original image
+				image_content = images.resize(self.request.get("img"), 
+				IMAGE_WIDTH, IMAGE_HEIGHT)
+			else:
+			    # if we have valid width and height values
+			    # then resize according to those values
+			    image_content = images.resize(self.request.get("img"), width, height)
+
+			# always generate a thumbnail for use on the admin page
+			thumb_content = images.resize(self.request.get("img"), 100, 100)
         else:
-            # if we have valid width and height values
-            # then resize according to those values
-            image_content = images.resize(self.request.get("img"), width, height)
-        
-        # always generate a thumbnail for use on the admin page
-        thumb_content = images.resize(self.request.get("img"), 100, 100)
-        
-        # create the image object
-        image = Image()
-        # and set the properties to the relevant values
-        image.image = db.Blob(image_content)
-        # we always store the original here in case of errors
-        # although it's currently not exposed via the frontend
-        image.thumb = db.Blob(thumb_content)z
-        image.user = users.get_current_user()
-        image.title = self.request.get('title')
+			if not self.request.get('key'):
+			  logging.critical('No key and no image! Cannot save image.')
+			  return self.redirect('/admin')
+			  image_content = None
+
+        # check if image is being edited
+        if self.request.get('key'):
+          image = db.get(self.request.get("key"))        
+        else:
+	      # create the image object
+          image = Image()
+          image.user = users.get_current_user()
+          image.title = self.request.get('title')
+        if image_content:
+		    # and set the properties to the relevant values
+	        image.image = db.Blob(image_content)
+	        # we always store the original here in case of errors
+	        # although it's currently not exposed via the frontend
+	        image.thumb = db.Blob(thumb_content) 
                 
         # store the image in the datasore
         image.put()

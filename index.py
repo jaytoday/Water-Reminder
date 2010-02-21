@@ -17,7 +17,7 @@ class Index(webapp.RequestHandler):
     Main View
     """
     def get(self):
-        "Responds to GET requets with the admin interface"
+        "Responds to GET requests with the admin interface"
         # query the datastore for images 
         images = Image.all().order("date").fetch(1000)
         context = {
