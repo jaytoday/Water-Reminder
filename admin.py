@@ -87,7 +87,13 @@ class Uploader(webapp.RequestHandler):
 
         # check if image is being edited
         if self.request.get('key'):
-          image = db.get(self.request.get("key"))        
+          image = db.get(self.request.get("key"))
+          if self.request.get('position'):
+	          position = int(self.request.get('position'))
+	          images = Image.all().order('date').fetch(100)
+	          #image_keys = [i.key() for i in images ]
+	          import datetime
+	                
         else:
 	      # create the image object
           image = Image()
