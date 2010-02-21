@@ -13,7 +13,11 @@ $(document).ready(function(){
      $('#slidesContainer a').click(function(){
 
        if ($('#controls').find('.active:last').attr('id') === 'leftControl')
-       actionControl = $('#leftControl');
+       {
+        window.location = 'http://awkwardbeauty-ca.blogspot.com/';
+        return; 
+         }
+        //actionControl = $('#leftControl');
        
        if ($('#controls').find('.active:first').attr('id') === 'rightControl')
        actionControl = $('#rightControl');
@@ -90,12 +94,22 @@ $(document).ready(function(){
 
   // manageControls: Hides and Shows controls depending on currentPosition
   function manageControls(position){
+    var this_slide = $('#slideInner').find('.slide:eq(' + position + ')');
+    
     // Hide left arrow if position is first slide
         if(position==0){ $('#leftControl').removeClass('active').find('img').hide() } 
         else{ $('#leftControl').addClass('active').find('img').show() }
         // Hide right arrow if position is last slide
-    if(position==numberOfSlides-1){ $('#rightControl').removeClass('active').find('img').hide() } 
-    else{ $('#rightControl').addClass('active').find('img').show() }
+    if(position==numberOfSlides-1){ 
+      $('#rightControl').removeClass('active').find('img').hide();
+      $('span#ai').hide();
+      this_slide.addClass('islink');
+      } 
+    else{ 
+      $('#rightControl').addClass('active').find('img').show();
+      $('span#ai').show();
+      this_slide.removeClass('islink');
+     }
   }     
   
 });

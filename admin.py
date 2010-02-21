@@ -86,7 +86,7 @@ class Uploader(webapp.RequestHandler):
         image.image = db.Blob(image_content)
         # we always store the original here in case of errors
         # although it's currently not exposed via the frontend
-        image.thumb = db.Blob(thumb_content)
+        image.thumb = db.Blob(thumb_content)z
         image.user = users.get_current_user()
         image.title = self.request.get('title')
                 

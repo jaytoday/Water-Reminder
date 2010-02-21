@@ -17,7 +17,7 @@
 
 <div class="slide" style="float: left; width: 850px;">
 <div class="imageContainer">
-<a {# href="/i/img?id={{ image.key }}" #} title={{ image.title }}>
+<a {# href="/i/img?id={{ image.key }}" #} title="{{ image.title }}">
 <img _src="/i/img?id={{ image.key }}">
 </a>
 </div>	
@@ -38,6 +38,8 @@
 <div id="controls">
 <span class="control" id="leftControl">
 </span>
+<span class="nav"><img src="images/exhibit.png" width="100" height="8" alt="Exhibit" />
+</span>
 <span class="control active" id="rightControl">
 </span>
 </div>
@@ -45,19 +47,13 @@
 <div class="mainNav">
 <span id="logo"></span>
 
-{#<span id="test"><img src="images/blank.png" width="50" height="50" /><img src="images/blank.png" width="50" height="50" /></span> #}
-<span class="nav"><img src="images/exhibit.png" width="100" height="8" alt="Exhibit" />
-</span>
-
-{#<span id="test"><img src="images/blank.png" width="50" height="50" /><img src="images/blank.png" width="50" height="50" /></span> #}
 
 <a target="_blank" href="http://awkwardbeauty-ca.blogspot.com/"><span id="ai"><img src="images/artInspirationBlog.png" alt="Art.Insp" /></span></a>
 </div>
-<div id="contact">
-<a href="mailto:tai@awkwardbeauty.ca">
-<img src="images/contact.png" width="288" height="12" alt="contact" name="mainNav2" />
+
+<a id="contact" href="mailto:tai@awkwardbeauty.ca">
 </a>
-</div>
+<div id="phone"></div>
 
 </div>
 </div>
