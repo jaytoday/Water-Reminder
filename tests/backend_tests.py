@@ -7,6 +7,7 @@ from webtest import TestApp, AppError
 from google.appengine.api import apiproxy_stub_map, user_service_stub, datastore_file_stub
 
 from backend import application
+import app_settings
 
 class BooksTest(unittest.TestCase):
 
@@ -28,20 +29,9 @@ class BooksTest(unittest.TestCase):
 
     def test_index_has_correct_title(self):
         response = self.app.get('/', expect_errors=True)        
-        response.mustcontain("<title>App Engine Image Host</title>")
+        response.mustcontain("<title>%s</title>" % app_settings.APP_TITLE)
         
     def test_index_returns_correct_mime_type(self):
         response = self.app.get('/', expect_errors=True)
         self.assertEquals(response.content_type, "text/html")
 
-    def test_image_upload(self):
-        # post image binary
-        # check retrieve record
-        pass
-        
-    def test_delete_image(self):
-        # post image binary
-        # check presense of Image object
-        # then post data to delete object
-        # and check object presense
-        pass
