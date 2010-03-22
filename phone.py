@@ -17,17 +17,6 @@ Twilio Call Handlers
 
 """
 
-class SMSHandler(webapp.RequestHandler):
-    """
-    Handles incoming SMS messages
-    """
-    def get(self):
-      return self.post()
-    
-    def post(self):
-      # TODO
-      pass
-
 class CallHandler(webapp.RequestHandler):
     """
     Handles incoming phone calls
@@ -42,14 +31,18 @@ class CallHandler(webapp.RequestHandler):
       caller = Subscriber.get_by_key_name(self.request.get('Caller'))        
       if self.request.get('Digits'):
         if not caller:
+          # create new subscriber
           caller = Subscriber(
             key_name = str(self.request.get('Caller')),
             phone_number = self.request.get('Caller')
             )
         caller.days_subscribed = int(self.request.get('Digits'))
+        if caller.days_subscribed > app_settings.MAX_DAYS: 
+          caller.days_subscribed = app_settings.MAX_DAYS
         caller.call_guid = self.request.get('CallGuid')
         caller.zip_code = int(self.request.get('CallerZip'))
         caller.put()
+        # add call scheduler as background task
         defer(methods.schedule_calls, caller.key().name(), caller.days_subscribed)
       if caller:
         days_subscribed = caller.days_subscribed
@@ -75,7 +68,6 @@ def xml_response(handler, page, context=None):
       
 # wire up the views
 application = webapp.WSGIApplication([
-    ('/twilio/sms', SMSHandler),
     ('/twilio/call', CallHandler)
 ], debug=Debug())
 
