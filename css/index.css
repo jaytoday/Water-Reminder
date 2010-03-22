@@ -49,7 +49,7 @@ display:block;
 width:300px;
 color:#000;
 border-color:#666;
-background: lightBlue url(/images/toolbar.png) repeat-x;
+background: #9cacc0 url(/images/toolbar.png) repeat-x; 
 -moz-border-radius: 10px;
 -webkit-border-radius:10px;
 }

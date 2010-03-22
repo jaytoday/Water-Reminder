@@ -32,12 +32,12 @@ def sort_by_key(seq,attr, reverse=True):
        
 
 
-def defer(method, *args, **kwargs):
+def defer(method, *args,  **kwargs):
   # A payload can also be sent
   from google.appengine.ext.deferred import deferred
   from google.appengine.api.labs import taskqueue
-  # _queue, _countdown, name
-  kwargs['_name'] = task_name( str(method.__name__) + str(args) + str(kwargs.values()) )
+  # _queue, _countdown, name, _eta
+  kwargs['_name'] = task_name( str(method.__name__) + str(args) + str(kwargs.values()))
   try:
    deferred.defer(method, *args, **kwargs)
    logging.info('deferred method %s with args %s and kwargs %s' % (method.__name__, args, kwargs))
@@ -91,7 +91,12 @@ class TaskFailError(Exception):
     logging.warning(error_msg)
     
 
-
+def randomInt(digits=5):
+  max = int(''.join('9' for d in range(digits)))
+  import random
+  return int(str(random.randint(0,max)).zfill(digits))
+  
+  
 def transactionize(fun):
   def decorate(*args, **kwargs):
     return db.run_in_transaction(fun, *args, **kwargs)

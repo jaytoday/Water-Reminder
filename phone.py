@@ -1,4 +1,4 @@
-import os
+import os, datetime
 
 from google.appengine.ext import db
 from google.appengine.ext import webapp
@@ -6,8 +6,16 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
 
+from utils import defer, Debug
 import app_settings 
+import methods
+from model import Subscriber
 
+"""
+
+Twilio Call Handlers
+
+"""
 
 class SMSHandler(webapp.RequestHandler):
     """
@@ -17,6 +25,7 @@ class SMSHandler(webapp.RequestHandler):
       return self.post()
     
     def post(self):
+      # TODO
       pass
 
 class CallHandler(webapp.RequestHandler):
@@ -27,7 +36,6 @@ class CallHandler(webapp.RequestHandler):
       return self.post()
     
     def post(self):
-      from models import Subscriber
       if not self.request.get('Caller'):
         raise ValueError('No caller available for call %s' % 
         self.request.get('CallGuid'))
@@ -39,8 +47,10 @@ class CallHandler(webapp.RequestHandler):
             phone_number = self.request.get('Caller')
             )
         caller.days_subscribed = int(self.request.get('Digits'))
-        caller.zip_code = self.request.get('CallerZip')
+        caller.call_guid = self.request.get('CallGuid')
+        caller.zip_code = int(self.request.get('CallerZip'))
         caller.put()
+        defer(methods.schedule_calls, caller.key().name(), caller.days_subscribed)
       if caller:
         days_subscribed = caller.days_subscribed
       else:
@@ -50,8 +60,8 @@ class CallHandler(webapp.RequestHandler):
       'base_url': 'http://' + os.environ['HTTP_HOST']
       }
       return xml_response(self, 'gather.xml', self.context)
-
-
+    
+      
 def xml_response(handler, page, context=None):
     """
     Renders an XML response using a provided template page and values
@@ -59,15 +69,15 @@ def xml_response(handler, page, context=None):
     path = os.path.join(os.path.dirname(__file__), page)
     handler.response.headers["Content-Type"] = "text/xml"
     handler.response.out.write(template.render(path, context))
-    
-    
 
+
+
+      
 # wire up the views
 application = webapp.WSGIApplication([
     ('/twilio/sms', SMSHandler),
     ('/twilio/call', CallHandler)
-
-], debug=True)
+], debug=Debug())
 
 def main():
     "Run the application"
