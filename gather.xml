@@ -3,10 +3,10 @@
     <Gather method="POST" timeout="10" numDigits="1" finishOnKey="#" action="{{ base_url }}/twilio/call">
        {% if not days_subscribed %}
         <Play>{{ base_url }}/greeting.wav</Play> 
-        <Say voice="woman">please enter the number of days to subscribe to the Water Reminder.
+        <Say voice="woman">Please enter the number of days to subscribe to the Water Reminder.
         </Say>
        {% else %}
-        <Say voice="woman">You are subscribed for {{ days_subscribed }}.
+        <Say voice="woman">You are subscribed to the Water Reminder for {{ days_subscribed }} days. You may enter a new number now to edit your subscription.
         </Say>
        {% endif %}
     </Gather>
