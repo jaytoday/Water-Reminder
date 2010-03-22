@@ -3,7 +3,6 @@ import os
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.api import images
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
 
@@ -17,7 +16,8 @@ class Index(webapp.RequestHandler):
     def get(self):
 			# set context
 			context = {
-			  'title': app_settings.APP_TITLE
+			  'title': app_settings.APP_TITLE,
+			  'twilio_number': app_settings.TWILIO_NUMBER
 			    }
 			# calculate the template path
 			path = os.path.join(os.path.dirname(__file__), 'templates',

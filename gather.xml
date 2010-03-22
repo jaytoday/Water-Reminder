@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Gather method="POST" timeout="10" numDigits="1" finishOnKey="#" action="{{ base_url }}/twilio/call">
+       {% if not days_subscribed %}
+        <Play>{{ base_url }}/greeting.wav</Play> 
+        <Say voice="woman">please enter the number of days to subscribe to the Water Reminder.
+        </Say>
+       {% else %}
+        <Say voice="woman">You are subscribed for {{ days_subscribed }}.
+        </Say>
+       {% endif %}
+    </Gather>
+    <Redirect method="GET">
+        {{ base_url }}/twilio/call
+    </Redirect>
+</Response>

@@ -4,6 +4,19 @@ runtime: python
 api_version: 1
 
 handlers:
+
+# Admin Handlers
+
+- url: /console/static
+  static_dir: console/app/view/static  
+  
+- url: /console.*
+  script: console/app/console.py
+  login: admin
+
+
+# Static Handlers
+  
 - url: /css
   static_dir: css
   
@@ -12,14 +25,18 @@ handlers:
 
 - url: /images
   static_dir: images
+  
+- url: /(.*\.(mp3|wav))
+  static_files: \1
+  upload: (.*\.(mp3|wav))  
+  
+  
+# Request Handlers  
 
-- url: /i/(img|thumb).*
-  script: frontend.py
-
+- url: /twilio/.*
+  script: twilio.py
+  
 - url: /
   script: index.py
 
-  
-- url: /.*
-  script: admin.py
-  login: admin
+
