@@ -23,6 +23,7 @@ def schedule_checks(phone_number, days_subscribed):
   for day in range(days_subscribed):
     now_day += datetime.timedelta(days=1)
     for check_time in (13, 15, 17):
+      check_time -= 4 #for New York. 7 for San Francisco 
       eta = datetime.datetime(year=now_day.year,
       month=now_day.month,day=now_day.day, hour=check_time)
       if eta < now: 

@@ -1,3 +1,5 @@
+__author__ = "James Alexander Levy (jamesalexanderlevy@gmail.com)"
+
 import os
 
 from google.appengine.ext import db

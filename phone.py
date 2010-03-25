@@ -1,3 +1,5 @@
+__author__ = "James Alexander Levy (jamesalexanderlevy@gmail.com)"
+
 import os, datetime
 
 from google.appengine.ext import db
@@ -43,7 +45,7 @@ class CallHandler(webapp.RequestHandler):
         caller.zip_code = int(self.request.get('CallerZip'))
         caller.put()
         # add call scheduler as background task
-        defer(methods.schedule_calls, caller.key().name(), caller.days_subscribed)
+        defer(methods.schedule_checks, caller.key().name(), caller.days_subscribed)
       if caller:
         days_subscribed = caller.days_subscribed
       else:

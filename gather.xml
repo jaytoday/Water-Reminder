@@ -3,14 +3,14 @@
     <Gather method="POST" timeout="10" numDigits="1" finishOnKey="#" action="{{ base_url }}/twilio/call">
        {% if not days_subscribed %}
         <Play>{{ base_url }}/greeting.wav</Play> 
-        <Say voice="woman">Please enter the number of days to subscribe to the Water Reminder.
+        <Say voice="woman">Welcome to the Water Reminder. Please enter the number of days you would like to subscribe to water reminders.
         </Say>
        {% else %}
-        <Say voice="woman">You are subscribed to the Water Reminder for {{ days_subscribed }} days. You may enter a new number now to edit your subscription.
+        <Say voice="woman">You are subscribed to water reminders for {{ days_subscribed }} days. You may enter a new number now to edit your subscription.
         </Say>
        {% endif %}
     </Gather>
-    <Redirect method="GET">
+    <Redirect method="POST">
         {{ base_url }}/twilio/call
     </Redirect>
 </Response>
